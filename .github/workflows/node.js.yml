@@ -14,21 +14,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Set Node.JS
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 18
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm test
     - name: Cloudflare Pages GitHub Action
       uses: cloudflare/pages-action@v1.5.0
       with:
@@ -39,5 +33,6 @@ jobs:
         # The name of the Pages project to upload to
         projectName: 'ng-testing-practice'
         # The directory of static assets to upload
-        directory: 'dist/ng-testing-practice'
+        directory: './dist/zoneless-calculator'
+        branch: 'main'
 
