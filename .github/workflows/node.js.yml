@@ -29,3 +29,15 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: Cloudflare Pages GitHub Action
+      uses: cloudflare/pages-action@v1.5.0
+      with:
+        # Cloudflare API Token
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        # Cloudflare Account ID
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        # The name of the Pages project to upload to
+        projectName: 'ng-testing-practice'
+        # The directory of static assets to upload
+        directory: 'dist/ng-testing-practice'
+
